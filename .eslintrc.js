@@ -1,11 +1,14 @@
-{
+module.exports = {
     "extends": "eslint:recommended",
     "env": {
         "node": true,
-        "es6": true
+        // Prefer the es2021 from .js over es6 from .json
+        "es2021": true,
     },
     "parserOptions": {
-        "ecmaVersion": 2021
+        // Use "latest" from .js file as it encompasses es2021 from .json and more
+        "ecmaVersion": "latest",
+        "sourceType": "module",
     },
     "rules": {
         "arrow-spacing": ["warn", { "before": true, "after": true }],
@@ -25,10 +28,7 @@
         "no-inline-comments": "error",
         "no-lonely-if": "error",
         "no-multi-spaces": "error",
-        "no-multiple-empty-lines": [
-            "error",
-            { "max": 2, "maxEOF": 1, "maxBOF": 0 }
-        ],
+        "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
         "no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
         "no-trailing-spaces": ["error"],
         "no-var": "error",
@@ -37,18 +37,30 @@
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
         "space-before-blocks": "error",
-        "space-before-function-paren": [
-            "error",
-            {
-                "anonymous": "never",
-                "named": "never",
-                "asyncArrow": "always"
-            }
-        ],
+        "space-before-function-paren": ["error", {
+            "anonymous": "never",
+            "named": "never",
+            "asyncArrow": "always",
+        }],
         "space-in-parens": "error",
         "space-infix-ops": "error",
         "space-unary-ops": "error",
         "spaced-comment": "error",
-        "yoda": "error"
-    }
-}
+        "yoda": "error",
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "linebreak-style": ["error", process.platform === "win32" ? "windows" : "unix"],
+    },
+    "overrides": [
+        {
+            "env": {
+                "node": true,
+            },
+            "files": [
+                ".eslintrc.{js,cjs}",
+            ],
+            "parserOptions": {
+                "sourceType": "script",
+            },
+        },
+    ],
+};
