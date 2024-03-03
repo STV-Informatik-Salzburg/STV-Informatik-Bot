@@ -4,7 +4,10 @@
   "description": "Discord designed and used by STV members and students of the PLUS Salzburg",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "deploy": "node deploy-commands.js",
+    "deploy-commands": "node deploy-commands.js"
   },
   "repository": {
     "type": "git",
